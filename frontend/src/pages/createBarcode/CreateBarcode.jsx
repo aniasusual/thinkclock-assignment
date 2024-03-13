@@ -24,6 +24,7 @@ const CreateBarcode = () => {
 
     const [plotImageUrl, setPlotImageUrl] = useState('');
     const [modelImageUrl, setModelImageUrl] = useState('');
+    const [tableUrl, setTableUrl] = useState('');
 
 
     const [file, setFile] = useState(null);
@@ -90,12 +91,15 @@ const CreateBarcode = () => {
     };
 
     const handleResults = async () => {
+        let plotImageUrl, modelImageUrl, tableUrl; // Declare variables to store URLs
+
         const fetchBodePlot = async () => {
             try {
                 const response = await fetch('http://127.0.0.1:5000/plot_image');
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
                 setPlotImageUrl(url);
+                plotImageUrl = url; // Store URL in local variable
             } catch (error) {
                 console.error('Error fetching Bode plot image:', error);
             }
@@ -106,21 +110,35 @@ const CreateBarcode = () => {
                 const response = await fetch('http://127.0.0.1:5000/circuit_model_image');
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
-                setModelImageUrl(url); // Assuming you have a state variable named 'modelImageUrl' to store the URL of the circuit model image
+                setModelImageUrl(url);
+                modelImageUrl = url; // Store URL in local variable
             } catch (error) {
                 console.error('Error fetching circuit model image:', error);
             }
         };
 
-        fetchBodePlot();
-        fetchModel();
+        // const fetchTable = async () => {
+        //     try {
+        //         const response = await fetch('http://127.0.0.1:5000/table');
+        //         const blob = await response.blob();
+        //         const url = URL.createObjectURL(blob);
+        //         setTableUrl(url);
+        //         tableUrl = url; // Store URL in local variable
+        //     } catch (error) {
+        //         console.error('Error fetching table image:', error);
+        //     }
+        // };
+
+        await Promise.all([fetchBodePlot(), fetchModel()]); // Execute all fetch operations concurrently
 
         // Cleanup function to revoke the object URLs
         return () => {
             URL.revokeObjectURL(plotImageUrl);
             URL.revokeObjectURL(modelImageUrl);
+            // URL.revokeObjectURL(tableUrl);
         };
     };
+
 
 
 
@@ -224,6 +242,8 @@ const CreateBarcode = () => {
                 <button onClick={handleResults}>click to see results</button>
                 <h1>Click to interact</h1>
                 {plotImageUrl && <Link to="http://127.0.0.1:5000/static/bode_plot.html"> <img src={plotImageUrl} alt="Bode Plot" /></Link>}
+                {modelImageUrl && <img src={modelImageUrl} alt="Circuit" />}
+                {tableUrl && <img src={tableUrl} alt="Table" />}
             </div>
 
 
