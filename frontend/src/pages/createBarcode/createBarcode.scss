@@ -1,0 +1,124 @@
+.hideBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 2s ease-out;
+  #backArrow {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+  }
+  h2 {
+    font-size: 5vh;
+    margin-bottom: 10vh;
+    color: rgb(109, 15, 31);
+    border-bottom: 2px solid black;
+  }
+  #cellInformationForm {
+    // border: 2px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px;
+      label {
+        margin-right: 100px;
+      }
+
+      input {
+        height: 3vh;
+        width: 15vw;
+        // border: none;
+        // border-bottom: 1px solid black;
+      }
+      select {
+        height: 4.2vh;
+        width: 15.5vw;
+      }
+    }
+    #submitBut {
+      height: 4vh;
+      width: 10vw;
+      text-align: center;
+      background-color: black;
+      border: none;
+      color: white;
+      border-radius: 2px;
+      transition: background-color 0.5s ease-out;
+    }
+    #submitBut:hover {
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+      border: 1px solid black;
+    }
+  }
+}
+
+.showBar {
+  display: grid;
+  grid-template-columns: 60vw 40vw;
+  height: 100vh;
+  #backArrow {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+  }
+  h2 {
+    font-size: 5vh;
+    margin-bottom: 5vh;
+  }
+  #cellInformationForm {
+    // border: 2px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px;
+      label {
+        margin-right: 100px;
+      }
+
+      input {
+        height: 3vh;
+        width: 15vw;
+        // border: none;
+        // border-bottom: 1px solid black;
+      }
+      select {
+        height: 4.2vh;
+        width: 15.5vw;
+      }
+    }
+    #submitBut {
+      height: 4vh;
+      width: 10vw;
+      text-align: center;
+    }
+  }
+
+  #barcodeDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // background-color: red;
+    // width: 20vw;
+    margin: 55% 20%;
+
+    h1 {
+      text-align: center;
+      // margin-bottom: 10vh;
+    }
+  }
+}
